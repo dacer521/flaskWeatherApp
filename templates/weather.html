@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
     <title>{{ title }}</title>
-    <link href = "{{ url_for('static', filename='styles/style.css')}}" rel = "stylesheet"/> <!
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
     <script>
         function toggleMoreInfo() {
             var moreInfoSection = document.getElementById("more-info");
-            if (moreInfoSection.style.display === "none") {
-                moreInfoSection.style.display = "block";
-            } else {
-                moreInfoSection.style.display = "none";
-            }
+            moreInfoSection.style.display = moreInfoSection.style.display === "none" ? "block" : "none";
         }
     </script>
-</head>
-<body>
-    <div class="weather-container"> <!-- Holds standard information-->
+    <div class="weather-container">
         <h1>Weather in {{ title }}</h1>
         <p>Status: {{ status }}</p>
         <p>Temperature: {{ temp }}°C</p>
         <p>Feels Like: {{ feels_like }}°C</p>
-
-        <button onclick="toggleMoreInfo()">More Info</button> <!-- Button to show additional information-->
-
-        <div id="more-info" style="display: none;">  <!-- Holds additional information-->
+        <img src="{{ icon }}" alt="Weather Icon" />
+        <button onclick="toggleMoreInfo()">More Info</button>
+        <div id="more-info" style="display: none;">
             <p>Sunrise: {{ sunrise }}</p>
             <p>Sunset: {{ sunset }}</p>
             <p>Longitude: {{ lon }}</p>
@@ -33,8 +29,7 @@
             <p>Humidity: {{ humidity }}%</p>
             <p>Sea Level: {{ sea_level }} hPa</p>
         </div>
-
-        <button onclick="window.location.href = '/';">Back</button> <!-- Button to go back to the home page-->
+        <button onclick="window.location.href = '/';">Back</button>
     </div>
 </body>
 </html>

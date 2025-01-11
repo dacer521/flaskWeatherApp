@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
     <title>Get Weather Conditions</title>
-    <link href = "{{ url_for('static', filename='styles/style.css')}}" rel = "stylesheet"/> <!-- Link to the CSS file-->
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 <body>
     <h1>Get Weather Conditions</h1>
-    <form action = "/weather">
-        <input type = "text" name = "city" id = "city" placeholder = "Enter a city"/> <!-- Input field for the city name-->
-        <button type = "submit">Submit</button> <!-- Button to submit the form-->
+    <form action="/weather">
+        <input type="text" name="city" id="city" placeholder="Enter a city" />
+        <button type="submit">Submit</button>
     </form>
-
-    
 </body>
 </html>
