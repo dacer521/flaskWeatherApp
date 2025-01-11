@@ -58,4 +58,5 @@ def get_weather():
     )
 
 if __name__ == "__main__":
+    print("Server Started")
     serve(app, host="0.0.0.0", port=8000)
