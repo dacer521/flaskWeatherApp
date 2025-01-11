@@ -3,11 +3,11 @@ from pprint import pprint
 import requests
 import os
 
-load_dotenv()
+load_dotenv() # Load environment variables from .env file 
 
 
-def get_current_weather(city="Kansas City"):
-
+def get_current_weather(city="Kansas City"): 
+    """does API call to get weather data"""
     request_url = f'http://api.openweathermap.org/data/2.5/weather?appid={os.getenv("API_KEY")}&q={city}&units=imperial'
 
     weather_data = requests.get(request_url).json()
@@ -16,14 +16,12 @@ def get_current_weather(city="Kansas City"):
 
 
 if __name__ == "__main__":
-    print('\n*** Get Current Weather Conditions ***\n')
+    print('\n*** Get Current Weather Conditions ***\n') #all the erst of this is for debugging purposes. doesn't impact user interaction. seperate file in case I add more in the future.
 
     city = input("\nPlease enter a city name: ")
 
-    # Check for empty strings or string with only spaces
-    # This step is not required here
     if not bool(city.strip()):
-        city = "Kansas City"
+        city = "Boston"
 
     weather_data = get_current_weather(city)
 

@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} Weather</title>
-    <link href = "{{ url_for('static', filename='styles/style.css')}}" rel = "stylesheet"/>
+    <title>{{ title }}</title>
+    <link href = "{{ url_for('static', filename='styles/style.css')}}" rel = "stylesheet"/> <!
+    <script>
+        function toggleMoreInfo() {
+            var moreInfoSection = document.getElementById("more-info");
+            if (moreInfoSection.style.display === "none") {
+                moreInfoSection.style.display = "block";
+            } else {
+                moreInfoSection.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
-    <h1>{{ title }} Weather</h1>
+    <div class="weather-container"> <!-- Holds standard information-->
+        <h1>Weather in {{ title }}</h1>
+        <p>Status: {{ status }}</p>
+        <p>Temperature: {{ temp }}°C</p>
+        <p>Feels Like: {{ feels_like }}°C</p>
 
-    <p>{{ status }} and {{ temp }} &deg;</p>
-    <p>Feels like {{ feels_like }} &deg;</p>
+        <button onclick="toggleMoreInfo()">More Info</button> <!-- Button to show additional information-->
 
-    <form action = "/weather">
-        <input type = "text" name = "city" id = "city" placeholder = "Enter a city"/>
-        <button type = "submit">Submit</button>
-    </form>
+        <div id="more-info" style="display: none;">  <!-- Holds additional information-->
+            <p>Sunrise: {{ sunrise }}</p>
+            <p>Sunset: {{ sunset }}</p>
+            <p>Longitude: {{ lon }}</p>
+            <p>Latitude: {{ lat }}</p>
+            <p>Humidity: {{ humidity }}%</p>
+            <p>Sea Level: {{ sea_level }} hPa</p>
+        </div>
 
-    
+        <button onclick="window.location.href = '/';">Back</button> <!-- Button to go back to the home page-->
+    </div>
 </body>
 </html>
