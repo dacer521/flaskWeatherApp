@@ -22,10 +22,6 @@
                 moreInfoSection.style.display = "none";
             }
         }
-        //function to go back to index.html
-        function goBack() {
-        window.location.href = 'templates/index.html';
-    }
 
         // JavaScript function to get the user's location and fetch weather data
         function getLocationAndFetchWeather() {
@@ -70,7 +66,7 @@
             <p>Sea Level: {{ sea_level }} hPa</p>
         </div>
 
-        <button type="button" onclick="goBack()">Back</button>
+        <button onclick="window.history.back()">Back</button>
     </div>
 </body>
 </html>
