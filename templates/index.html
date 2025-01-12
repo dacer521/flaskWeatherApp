@@ -5,41 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
     <title>Weather App</title>
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>      
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
 </head>
 <body>
     <div class="weather-container">
         <h1>Enter City</h1>
-        <form id="weather-form" action="/weather" method="get">    <!-- Form to submit the city name or location -->
+        <form id="weather-form" action="/weather" method="get">
             <div class="input-container">
-                <button type="button" onclick="getLocationAndSubmit()">Use My Location</button>    <!-- Button to get the user's location --> 
-                <input type="text" id = "city" name="city" placeholder="Enter city name">          <!-- Input field to enter the city name -->
-                <input type="hidden" name="latitude">                             <!-- Hidden input field to store the latitude -->
-                <input type="hidden" name="longitude">                             <!-- Hidden input field to store the longitude -->
-                <button type="submit">Submit</button>                               <!-- Button to submit the form -->
+                <button type="button" onclick="getLocationAndSubmit()">Use My Location</button>
+                <input type="text" id="city" name="city" placeholder="Enter city name">
+                <input type="hidden" name="latitude">
+                <input type="hidden" name="longitude">
+                <button type="submit">Submit</button>
             </div>
         </form>
+        <button style="margin-top: 5rem;" type="button" onclick="showInfo()">Show Info</button>
+        <div id="info" style="display:none; margin-top: 2rem;">
+            <p>My name is David Manuel.</p>
+            <p>This project was made for a technical assesment for Product Manager Accelerator. Product Manager Accelerator (PMA) is an educational platform dedicated to helping individuals transition into product management roles, even without prior experience.</p>
+        </div>
     </div>
 
     <script>
-
-    function getLocationAndSubmit() {        // Function to get the user's location and submit the form
-        document.getElementById('city').value = '';   //fixes bug where if city is not cleared and user clicks on "Use My Location" button, the city name is looked up instead
+    function getLocationAndSubmit() {
+        document.getElementById('city').value = '';
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success, error); // api request
+            navigator.geolocation.getCurrentPosition(success, error);
         } else {
-            alert("Geolocation is not supported by this browser."); // error message
+            alert("Geolocation is not supported by this browser.");
         }
     }
 
     function success(position) {
-        document.querySelector('input[name="latitude"]').value = position.coords.latitude; // set latitude
-        document.querySelector('input[name="longitude"]').value = position.coords.longitude; // set longitude 
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        document.querySelector('input[name="latitude"]').value = lat;
+        document.querySelector('input[name="longitude"]').value = lon;
         document.getElementById('weather-form').submit();
     }
 
     function error() {
         alert("Unable to retrieve your location.");
+    }
+
+    function showInfo() {
+        document.getElementById('info').style.display = 'block';
     }
     </script>
 </body>
