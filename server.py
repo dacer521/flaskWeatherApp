@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request #importing Flask, render_template, and request from flask
 from weather import get_current_weather
 from waitress import serve
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__) #creating an instance of the Flask class
 
 # Dictionary to map weather statuses to icon URLs
-weather_icons = {
+weather_icons = {                                   #dictionary of weather statuses used later to get image
     "clear": "static/images/clear.jpg",
     "clouds": "static/images/cloudy.jpg",
     "rain": "static/images/rainy.jpg",
@@ -24,17 +24,18 @@ weather_icons = {
 }
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index') #setting up index page on load
 def index():
     return render_template('index.html')
 
-@app.route('/weather')
-def get_weather():
+@app.route('/weather')   #setting up weather page when city/location is entered
+
+def get_weather(): #getting longitude and latitude from city name
     city = request.args.get('city')
     latitude = request.args.get('latitude')
     longitude = request.args.get('longitude')
 
-    if not city and latitude and longitude:
+    if not city and latitude and longitude:   #getting user location
         # Use a reverse geocoding API to get the city name from latitude and longitude
         response = requests.get(f'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={latitude}&longitude={longitude}&localityLanguage=en')
         data = response.json()
@@ -43,15 +44,15 @@ def get_weather():
     if not city or not city.strip():
         city = "Boston"
 
-    weather_data = get_current_weather(city)
+    weather_data = get_current_weather(city)   #getting weather data from weather.py
 
     if not weather_data['cod'] == 200:
         return render_template('city-not-found.html')
 
-    weather_status = weather_data["weather"][0]["main"].lower()
-    icon_url = weather_icons.get(weather_status, weather_icons["default"])
+    weather_status = weather_data["weather"][0]["main"].lower()                #getting weather status from weather data
+    icon_url = weather_icons.get(weather_status, weather_icons["default"])     #getting icon url from weather_icons dictionary
 
-    return render_template(
+    return render_template(         #rendering weather.html with weather data
         "weather.html",
         title=weather_data['name'],
         status=weather_data["weather"][0]["description"].capitalize(),
@@ -67,5 +68,5 @@ def get_weather():
     )
 
 if __name__ == "__main__":
-    print("Server Started")
-    serve(app, host="0.0.0.0", port=8000)
+    print("Server Started") #print statement to show server has started
+    serve(app, host="0.0.0.0", port=8000) #running the server locally on port 8000

@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Not Found</title>
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />     <!-- Link to the external CSS file for styling -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">    <!-- Link to the favicon -->
 </head>
 <body>
-    <h1>City Not Found</h1>
-    <h2>Try Again?</h2>
+    <h1>City Not Found</h1> <!-- Display the error message -->
+    <h2>Try Again?</h2>      <!-- Prompt the user to try again -->
     <form action="/weather">
+        <button type="button" onclick="getLocationAndSubmit()">Use My Location</button>  <!-- User input options-->
         <input type="text" name="city" id="city" placeholder="Enter a City" />
         <button type="submit">Submit</button>
     </form>
