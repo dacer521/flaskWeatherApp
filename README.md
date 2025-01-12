@@ -42,6 +42,8 @@ Humidity
 
 Sea level
 
+I attempted to create a 5 day forecat, however, the API I am using only provides the 1 day forecast in the free version, so I was inhibited from adding it.
+
 **Requirements**
 
 Ensure you have the necessary dependencies installed to run the app. Refer to the requirements.txt file for details.
