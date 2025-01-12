@@ -1,9 +1,11 @@
+/* Reset margin and padding for all elements, and set box-sizing to border-box */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Style for the body element */
 body {
     padding: 2rem;
     background-color: #333;
@@ -17,6 +19,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* Style for the weather container */
 .weather-container {
     background-color: #444;
     padding: 2rem;
@@ -27,32 +30,37 @@ body {
     width: 100%;
 }
 
+/* Style for the heading inside the weather container */
 .weather-container h1 {
     margin-bottom: 1rem;
     font-size: 2.5rem;
 }
 
+/* Style for paragraphs inside the weather container */
 .weather-container p {
     margin: 0.5rem 0;
     width: 100%;
     align-items: center;
 }
 
+/* Style for images inside the weather container */
 .weather-container img {
     margin: 1rem 0;
     width: max-width;
-    display:block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     height: 10rem;
 }
 
+/* Style for the input container */
 .input-container {
     display: flex;
     width: 100%;
     gap: 1rem;
 }
 
+/* Style for text input fields */
 input[type="text"] {
     flex: 1;
     padding: 1rem;
@@ -61,6 +69,7 @@ input[type="text"] {
     border: 1px solid #555;
 }
 
+/* Style for buttons */
 button {
     font-size: 1.5rem;
     padding: 0.5rem 1rem;
@@ -72,10 +81,12 @@ button {
     transition: background-color 0.3s;
 }
 
+/* Hover effect for buttons */
 button:hover {
     background-color: #666;
 }
 
+/* Style for the more info section */
 #more-info {
     margin-top: 1rem;
     text-align: center;
