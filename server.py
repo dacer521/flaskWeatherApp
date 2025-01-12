@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from weather import get_current_weather
 from waitress import serve
+import requests
 
 app = Flask(__name__)
 
@@ -30,6 +31,14 @@ def index():
 @app.route('/weather')
 def get_weather():
     city = request.args.get('city')
+    latitude = request.args.get('latitude')
+    longitude = request.args.get('longitude')
+
+    if not city and latitude and longitude:
+        # Use a reverse geocoding API to get the city name from latitude and longitude
+        response = requests.get(f'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={latitude}&longitude={longitude}&localityLanguage=en')
+        data = response.json()
+        city = data.get('city')
 
     if not city or not city.strip():
         city = "Boston"

@@ -4,14 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
-    <title>Get Weather Conditions</title>
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+    <title>Weather App</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
 </head>
 <body>
-    <h1>Get Weather Conditions</h1>
-    <form action="/weather">
-        <input type="text" name="city" id="city" placeholder="Enter a city!" />
-        <button type="submit">Submit</button>
-    </form>
+    <div class="weather-container">
+        <h1>Enter City</h1>
+        <form id="weather-form" action="/weather" method="get">
+            <div class="input-container">
+                <button type="button" onclick="getLocationAndSubmit()">Use My Location</button>
+                <input type="text" id = "city" name="city" placeholder="Enter city name">
+                <input type="hidden" name="latitude">
+                <input type="hidden" name="longitude">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+    function getLocationAndSubmit() {
+        document.getElementById('city').value = '';
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function success(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        document.querySelector('input[name="latitude"]').value = lat;
+        document.querySelector('input[name="longitude"]').value = lon;
+        document.getElementById('weather-form').submit();
+    }
+
+    function error() {
+        alert("Unable to retrieve your location.");
+    }
+    </script>
 </body>
 </html>

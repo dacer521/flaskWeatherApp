@@ -4,23 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <!-- Page title -->
     <title>{{ title }}</title>
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-</head>
-<body>
+    
+    <!-- Link to the external CSS file for styling -->
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+    
+    <!-- JavaScript function to toggle the visibility of the "More Info" section -->
     <script>
         function toggleMoreInfo() {
             var moreInfoSection = document.getElementById("more-info");
-            moreInfoSection.style.display = moreInfoSection.style.display === "none" ? "block" : "none";
+            // Check the current display style and toggle between 'none' and 'block'
+            if (moreInfoSection.style.display === "none") {
+                moreInfoSection.style.display = "block";
+            } else {
+                moreInfoSection.style.display = "none";
+            }
+        }
+
+        // JavaScript function to get the user's location and fetch weather data
+        function getLocationAndFetchWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            // Redirect to the weather route with latitude and longitude as query parameters
+            window.location.href = `/weather?lat=${lat}&lon=${lon}`;
         }
     </script>
+</head>
+<body>
+    <!-- Main container for the weather information -->
     <div class="weather-container">
+        <!-- Display the city name -->
         <h1>Weather in {{ title }}</h1>
+        <!-- Display the weather status -->
         <p>Status: {{ status }}</p>
+        <!-- Display the temperature -->
         <p>Temperature: {{ temp }}°C</p>
+        <!-- Display the "feels like" temperature -->
         <p>Feels Like: {{ feels_like }}°C</p>
+
+        <!-- Display the weather icon -->
         <img src="{{ icon }}" alt="Weather Icon" />
+
+        <!-- Button to toggle the visibility of the "More Info" section -->
         <button onclick="toggleMoreInfo()">More Info</button>
+
+        <!-- Hidden section for additional weather information -->
         <div id="more-info" style="display: none;">
             <p>Sunrise: {{ sunrise }}</p>
             <p>Sunset: {{ sunset }}</p>
@@ -29,7 +67,8 @@
             <p>Humidity: {{ humidity }}%</p>
             <p>Sea Level: {{ sea_level }} hPa</p>
         </div>
-        <button onclick="window.location.href = '/';">Back</button>
+
+        <button onclick="window.history.back()">Back</button>
     </div>
 </body>
 </html>

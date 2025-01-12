@@ -14,10 +14,71 @@ body {
     align-items: center;
     gap: 2rem;
     font-size: 2rem;
+    font-family: Arial, sans-serif;
 }
 
-input, button {
-    font-size: 2rem;
-    padding: 1rem;
+.weather-container {
+    background-color: #444;
+    padding: 2rem;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+.weather-container h1 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.weather-container p {
+    margin: 0.5rem 0;
+    width: 100%;
+    align-items: center;
+}
+
+.weather-container img {
+    margin: 1rem 0;
+    width: max-width;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 10rem;
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #555;
+}
+
+button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #555;
+    color: whitesmoke;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #666;
+}
+
+#more-info {
+    margin-top: 1rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
